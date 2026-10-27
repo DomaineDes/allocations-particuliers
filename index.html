@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Réservation 2025 – Clients fidèles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --paper: #ffffff;
+    --ink: #1c1917;
+    --muted: #6b635b;
+    --line: #e6dfd5;
+    --wine: #6d1a2b;
+    --wine-dark: #541120;
+    --gold: #a98a54;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Jost", system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Logo */
+  .logo { text-align: center; padding: 48px 0 8px; }
+  .logo img { width: min(360px, 80%); height: auto; display: inline-block; }
+  .logo-fallback { display: none; font-family: "Cormorant Garamond", serif; text-transform: uppercase; letter-spacing: .08em; }
+  .logo-fallback small { display: block; font-size: .8rem; letter-spacing: .12em; }
+  .logo-fallback strong { display: block; font-weight: 500; font-size: 2.2rem; margin: 4px 0; }
+  .logo.no-img img { display: none; }
+  .logo.no-img .logo-fallback { display: block; }
+
+  .rule { width: 56px; height: 1px; background: var(--gold); margin: 28px auto; border: 0; }
+
+  /* Intro */
+  .intro { text-align: center; }
+  .intro h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    margin: 0 0 18px;
+    color: var(--wine);
+  }
+  .intro p { margin: 0 auto 14px; max-width: 600px; font-size: 1.05rem; }
+  .intro .note { color: var(--muted); font-size: .95rem; }
+
+  /* Form */
+  form { margin-top: 40px; }
+  fieldset { border: 0; padding: 0; margin: 0 0 36px; }
+  legend, .section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--wine);
+    margin: 0 0 14px;
+    padding: 0;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 22px;
+  }
+  .group-title {
+    font-family: "Jost", sans-serif;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 22px 0 2px;
+  }
+  .group-title:first-child { margin-top: 16px; }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .name { font-family: "Cormorant Garamond", serif; font-size: 1.28rem; line-height: 1.25; }
+  .row .name em { font-style: italic; }
+  .row.has-qty .name { color: var(--wine); font-weight: 600; }
+
+  .stepper { display: inline-flex; align-items: center; flex-shrink: 0; }
+  .stepper button {
+    width: 38px; height: 38px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--wine);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .stepper button:first-child { border-radius: 4px 0 0 4px; }
+  .stepper button:last-child { border-radius: 0 4px 4px 0; }
+  .stepper button:hover { background: #f1e8dc; border-color: var(--gold); }
+  .stepper input {
+    width: 48px; height: 38px;
+    border: 1px solid var(--line);
+    border-left: 0; border-right: 0;
+    text-align: center;
+    font: inherit; font-weight: 500; font-size: 1rem;
+    background: var(--paper);
+    color: var(--ink);
+    -moz-appearance: textfield;
+  }
+  .stepper input::-webkit-outer-spin-button,
+  .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  .total {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 14px; padding: 0 4px;
+    font-family: "Cormorant Garamond", serif; font-size: 1.3rem;
+  }
+  .total strong { color: var(--wine); font-size: 1.6rem; font-weight: 600; }
+
+  /* Fields */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  label { font-size: .85rem; font-weight: 400; color: var(--muted); }
+  input[type=text], input[type=email], input[type=tel], textarea {
+    font: inherit; font-weight: 300;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--paper);
+    color: var(--ink);
+    width: 100%;
+  }
+  textarea { min-height: 100px; resize: vertical; }
+  input:focus, textarea:focus, .stepper button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: .85rem; color: var(--muted); margin: 8px 0 24px; }
+  .consent input { margin-top: 4px; accent-color: var(--wine); }
+
+  .submit {
+    display: block; width: 100%;
+    padding: 16px;
+    background: var(--wine);
+    color: #fff;
+    border: 0; border-radius: 4px;
+    font: inherit; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .submit:hover { background: var(--wine-dark); }
+  .submit:disabled { opacity: .6; cursor: wait; }
+
+  .error { color: #a3201f; font-size: .92rem; margin: 0 0 16px; min-height: 1.2em; text-align: center; }
+
+  .thanks { text-align: center; padding: 40px 10px; }
+  .thanks h2 { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 2rem; color: var(--wine); margin: 0 0 12px; }
+
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 48px; }
+
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+    .card { padding: 4px 16px; }
+    .row { gap: 10px; }
+    .row .name { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header class="logo" id="logo">
+    <img src="logo.png" alt="Domaine Desvignes – Givry" onerror="document.getElementById('logo').classList.add('no-img')">
+    <div class="logo-fallback">
+      <small>Grand Vin de Bourgogne</small>
+      <strong>Domaine Desvignes</strong>
+      <small>Givry</small>
+    </div>
+  </header>
+
+  <hr class="rule">
+
+  <section class="intro">
+    <h1>Votre réservation, en priorité</h1>
+    <p>Chers amis du domaine, vous nous suivez fidèlement depuis plusieurs années et nous tenions à vous en remercier.</p>
+    <p>La récolte 2025 a été de petite taille, et nous n’aurons malheureusement pas assez de bouteilles pour satisfaire tout le monde. Nous avons donc souhaité vous réserver, à vous, nos clients historiques, la possibilité d’exprimer vos souhaits en premier.</p>
+    <p>Indiquez ci-dessous les quantités que vous aimeriez recevoir pour chaque cuvée. Nous reviendrons vers vous par e-mail pour confirmer votre attribution en fonction des disponibilités.</p>
+    <p class="note">Cette page est réservée aux clients à qui nous l’avons adressée. Merci de ne pas la diffuser.</p>
+  </section>
+
+  <hr class="rule">
+
+  <div id="formWrap">
+    <form id="orderForm" novalidate>
+      <input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <fieldset>
+        <legend>Vos vins · Millésime 2025</legend>
+        <div class="card" id="wines"></div>
+        <div class="total"><span>Total de bouteilles souhaitées</span><strong id="total">0</strong></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Vos coordonnées</legend>
+        <div class="grid">
+          <div class="field"><label for="prenom">Prénom</label><input type="text" id="prenom" name="prenom" autocomplete="given-name" required></div>
+          <div class="field"><label for="nom">Nom</label><input type="text" id="nom" name="nom" autocomplete="family-name" required></div>
+          <div class="field"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" required></div>
+          <div class="field"><label for="tel">Téléphone</label><input type="tel" id="tel" name="telephone" autocomplete="tel"></div>
+          <div class="field full"><label for="message">Un message, une précision ? (facultatif)</label><textarea id="message" name="message"></textarea></div>
+        </div>
+      </fieldset>
+
+      <label class="consent">
+        <input type="checkbox" id="consent" required>
+        <span>J’accepte que mes coordonnées soient utilisées uniquement pour traiter cette demande de réservation. Elles ne sont ni transmises à des tiers ni conservées au-delà de cette campagne.</span>
+      </label>
+
+      <p class="error" id="error" role="alert"></p>
+      <button type="submit" class="submit" id="submitBtn">Envoyer ma demande</button>
+    </form>
+  </div>
+
+  <footer>Domaine Desvignes · Givry</footer>
+</main>
+
+<script>
+  // ============ À PERSONNALISER ============
+  const ACCESS_KEY = "VOTRE_CLE_WEB3FORMS";   // clé reçue par e-mail de web3forms.com
+  const MAX_PAR_CUVEE = 24;                   // quantité maximale par cuvée
+  // =========================================
+
+  // Les parties entre guillemets s'affichent en italique.
+  const CUVEES = [
+    { groupe: "Givry Rouge", vins: [
+      { nom: 'Givry Rouge' },
+      { nom: 'Givry Rouge', italique: '"Champ la Dame"' },
+      { nom: 'Givry Rouge 1er cru', italique: '"La Grande Berge"' },
+      { nom: 'Givry Rouge 1er cru', italique: '"Ozymandias"' },
+      { nom: 'Givry Rouge 1er cru', italique: '"Clos du Vernoy - Monopole"' }
+    ]},
+    { groupe: "Givry Blanc", vins: [
+      { nom: 'Givry Blanc' },
+      { nom: 'Givry Blanc', italique: '"En Chenèves"' },
+      { nom: 'Givry Blanc 1er cru', italique: '"Les Grandes Vignes"' }
+    ]},
+    { groupe: "Bourgogne", vins: [
+      { nom: 'Bourgogne Rouge' }
+    ]},
+    { groupe: "Mercurey", vins: [
+      { nom: "Mercurey Rouge P'tit Loup" },
+      { nom: 'Mercurey Rouge 1er cru Clos des Montaigus' }
+    ]}
+  ];
+
+  const winesEl = document.getElementById("wines");
+  const totalEl = document.getElementById("total");
+  const errorEl = document.getElementById("error");
+  const inputs = [];
+
+  const escapeHtml = s => s.replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+  const plainName = v => v.italique ? v.nom + " " + v.italique : v.nom;
+
+  CUVEES.forEach(g => {
+    const h = document.createElement("div");
+    h.className = "group-title";
+    h.textContent = g.groupe;
+    winesEl.appendChild(h);
+
+    g.vins.forEach(v => {
+      const row = document.createElement("div");
+      row.className = "row";
+      const label = escapeHtml(v.nom) + (v.italique ? " <em>" + escapeHtml(v.italique) + "</em>" : "");
+      row.innerHTML =
+        '<div class="name">' + label + '</div>' +
+        '<div class="stepper">' +
+          '<button type="button" aria-label="Retirer une bouteille">−</button>' +
+          '<input type="number" min="0" max="' + MAX_PAR_CUVEE + '" value="0" inputmode="numeric" aria-label="Quantité : ' + escapeHtml(plainName(v)) + '">' +
+          '<button type="button" aria-label="Ajouter une bouteille">+</button>' +
+        '</div>';
+      const [minus, plus] = row.querySelectorAll("button");
+      const input = row.querySelector("input");
+      const set = n => {
+        n = Math.max(0, Math.min(MAX_PAR_CUVEE, parseInt(n, 10) || 0));
+        input.value = n;
+        row.classList.toggle("has-qty", n > 0);
+        updateTotal();
+      };
+      minus.addEventListener("click", () => set(+input.value - 1));
+      plus.addEventListener("click", () => set(+input.value + 1));
+      input.addEventListener("input", () => set(input.value));
+      winesEl.appendChild(row);
+      inputs.push({ v, input });
+    });
+  });
+
+  function updateTotal() {
+    totalEl.textContent = inputs.reduce((s, x) => s + (parseInt(x.input.value, 10) || 0), 0);
+  }
+
+  document.getElementById("orderForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    errorEl.textContent = "";
+
+    const f = e.target;
+    const prenom = f.prenom.value.trim();
+    const nom = f.nom.value.trim();
+    const email = f.email.value.trim();
+    const total = +totalEl.textContent;
+
+    if (total === 0) { errorEl.textContent = "Merci d’indiquer au moins une bouteille."; return; }
+    if (!prenom || !nom) { errorEl.textContent = "Merci d’indiquer votre prénom et votre nom."; return; }
+    if (!/^\S+@\S+\.\S+$/.test(email)) { errorEl.textContent = "Merci de vérifier votre adresse e-mail."; return; }
+    if (!f.consent.checked) { errorEl.textContent = "Merci de cocher la case d’acceptation."; return; }
+    if (ACCESS_KEY === "VOTRE_CLE_WEB3FORMS") { errorEl.textContent = "Formulaire non configuré : la clé d’envoi est à renseigner."; return; }
+
+    const recap = inputs
+      .filter(x => (parseInt(x.input.value, 10) || 0) > 0)
+      .map(x => "• " + plainName(x.v) + " 2025 : " + x.input.value + " bouteille" + (x.input.value > 1 ? "s" : ""))
+      .join("\n");
+
+    const payload = {
+      access_key: ACCESS_KEY,
+      subject: "Réservation 2025 – " + prenom + " " + nom + " (" + total + " bouteille" + (total > 1 ? "s" : "") + ")",
+      from_name: "Réservation clients fidèles",
+      botcheck: f.botcheck.value,
+      "Nom": prenom + " " + nom,
+      email: email,
+      "Téléphone": f.telephone.value.trim() || "—",
+      "Commande souhaitée": recap,
+      "Total de bouteilles": total,
+      "Message": f.message.value.trim() || "—"
+    };
+
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true; btn.textContent = "Envoi en cours…";
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || "Erreur d’envoi");
+
+      document.getElementById("formWrap").innerHTML =
+        '<div class="thanks"><h2>Merci ' + escapeHtml(prenom) + ' !</h2>' +
+        '<p>Votre demande a bien été envoyée. Nous reviendrons vers vous par e-mail pour confirmer votre attribution.</p></div>';
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      errorEl.textContent = "L’envoi a échoué. Merci de réessayer, ou de nous écrire directement par e-mail.";
+      btn.disabled = false; btn.textContent = "Envoyer ma demande";
+    }
+  });
+</script>
+</body>
+</html>
