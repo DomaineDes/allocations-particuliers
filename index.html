@@ -94,6 +94,7 @@
   .row .name { font-family: "Cormorant Garamond", serif; font-size: 1.28rem; line-height: 1.25; }
   .row .name em { font-style: italic; }
   .row.has-qty .name { color: var(--wine); font-weight: 600; }
+  .row.blanc.has-qty .name { color: #928e3d; }
 
   .stepper { display: inline-flex; align-items: center; flex-shrink: 0; }
   .stepper button {
@@ -284,7 +285,7 @@
 
     g.vins.forEach(v => {
       const row = document.createElement("div");
-      row.className = "row";
+     row.className = "row" + (g.groupe === "Givry Blanc" ? " blanc" : "");
       const label = escapeHtml(v.nom) + (v.italique ? " <em>" + escapeHtml(v.italique) + "</em>" : "");
       row.innerHTML =
         '<div class="name">' + label + '</div>' +
